@@ -1,7 +1,12 @@
+import PlantBg from "./src/assets/images/plantBg.svg"
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    // backgroundImage: {
+    //   plantBg: "url('./src/assets/images/plantBg.svg')",
+    // },
     fontFamily: {
       poppins: ["Poppins", "serif"],
       philosopher: ["Philosopher", "serif"],
@@ -16,6 +21,9 @@ module.exports = {
       "b-md": ["0.875rem", "1.5rem"], // 14px
       "b-sm": ["0.75rem", "1.3rem"], // 12px
     },
+    // backgroundImage: {
+    //   plantBg: "url('./src/assets/images/plantBg.svg')",
+    // },
     colors: {
       current: "currentColor",
       white: "#FFF",
