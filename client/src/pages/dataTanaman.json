@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "data-satu",
+    "title": "Data Satu",
+    "content": "Ini adalah data satu."
+  },
+  {
+    "slug": "data-dua",
+    "title": "Data Dua",
+    "content": "Ini adalah data dua."
+  },
+  {
+    "slug": "data-tiga",
+    "title": "Data Tiga",
+    "content": "Ini adalah data tiga."
+  }
+]
