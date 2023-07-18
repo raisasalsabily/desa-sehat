@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       poppins: ["Poppins", "serif"],
+      philosopher: ["Philosopher", "serif"],
     },
     fontSize: {
       "h-xl": ["3rem", "4.5rem"], // 48px
@@ -31,12 +32,22 @@ module.exports = {
         900: "#1A1A1A",
       },
       teal: {
-        50: "#9CDCD1",
+        50: "#9CE5CB",
         100: "#6BCAB9",
         300: "#39B9A2",
         500: "#08A78B",
         700: "#06866F",
         900: "#067561",
+      },
+      lime: {
+        50: "#f7fee7",
+        100: "#F5EDA8",
+      },
+      green: {
+        700: "#15803d",
+      },
+      emerald: {
+        600: "#0B845C",
       },
       blue: {
         50: "#A3B9C5",
