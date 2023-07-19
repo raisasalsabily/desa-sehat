@@ -65,7 +65,9 @@ const Plant = () => {
                     {data?.nama}
                   </h5>
                   {/* nama latin */}
-                  <p>{data?.namaLatin}</p>
+                  <p>
+                    <i>{data?.namaLatin}</i>
+                  </p>
                 </div>
 
                 {/* gambar tanaman */}
@@ -89,7 +91,13 @@ const Plant = () => {
               {/* Manfaat - START */}
               <div id="manfaat__container" className="flex flex-col gap-3">
                 <h5 className="font-bold">Manfaat</h5>
-                <p className="text-b-md text-justify">{data?.manfaat}</p>
+                {/* <p className="text-b-md text-justify">{data?.manfaat}</p> */}
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: data?.manfaat,
+                  }}
+                  className="set-inner-html text-b-md text-justify"
+                />
               </div>
               {/* Manfaat - END */}
 

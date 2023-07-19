@@ -6,6 +6,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* to enable list style in dangerouslysetinnerhtml, enable set-inner-html class  */
+  .set-inner-html ul {
+    @apply list-disc list-inside;
+  }
+  .set-inner-html ol {
+    @apply list-decimal list-inside;
+  }
+}
+
 * {
   font-family: "Poppins", sans-serif;
 }
