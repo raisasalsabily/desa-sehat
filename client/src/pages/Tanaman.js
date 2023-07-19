@@ -1,5 +1,7 @@
-import React from "react"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { useLocation, useParams } from "react-router-dom"
+import axios from "axios"
+
 import dataTanaman from "./dataTanaman.json"
 
 import Navbar from "../components/navbar/Navbar"
@@ -13,109 +15,104 @@ const Plant = () => {
   const location = useLocation()
   const path = location.pathname.split("/")[2]
 
-  // Cari data yang sesuai dengan slug
-  const data = dataTanaman.find((item) => item.slug === slug)
+  const [data, setData] = useState(null)
 
-  if (!data) {
-    return <div>Data tidak ditemukan.</div>
-  }
+  // Cari data yang sesuai dengan slug
+  // const data = dataTanaman.find((item) => item.slug === slug)
+
+  // if (!data) {
+  //   return <div>Data tidak ditemukan.</div>
+  // }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://raw.githubusercontent.com/raisasalsabily/desa-sehat-data/main/data/dataTanaman.json"
+        )
+        const filteredData = response.data.filter((item) => item.slug === slug)
+        setData(filteredData.length > 0 ? filteredData[0] : null)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [slug])
 
   return (
     <div>
-      <Navbar />
+      {data ? (
+        <div>
+          <Navbar />
 
-      <main>
-        {/* Judul Tanaman - START */}
-        <div
-          id="plant__title__container"
-          className="flex flex-col px-8 pt-12 pb-6 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${PlantBg})`,
-          }}
-        >
-          <div id="plant__title" className="">
-            {/* nama tanaman */}
-            <div className="font-semibold text-b-md flex flex-col gap-0">
-              {/* jenis tanaman*/}
-              <p>Tanaman Obat</p>
-              {/* nama tanaman*/}
-              <h5 className="font-philosopher text-h-lg font-bold">
-                {data?.title}
-              </h5>
-              {/* nama latin */}
-              <p>Curcuma longa</p>
-            </div>
+          <main>
+            {/* Judul Tanaman - START */}
+            <div
+              id="plant__title__container"
+              className="flex flex-col px-8 pt-12 pb-6 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${PlantBg})`,
+              }}
+            >
+              <div id="plant__title" className="">
+                {/* nama tanaman */}
+                <div className="font-semibold text-b-md flex flex-col gap-0">
+                  {/* jenis tanaman*/}
+                  <p>{data?.jenis}</p>
+                  {/* nama tanaman*/}
+                  <h5 className="font-philosopher text-h-lg font-bold">
+                    {data?.nama}
+                  </h5>
+                  {/* nama latin */}
+                  <p>{data?.namaLatin}</p>
+                </div>
 
-            {/* gambar tanaman */}
-            <div className="flex justify-end">
-              <div className="w-60">
-                <img src={PlantImg} alt="Template Tanaman"></img>
+                {/* gambar tanaman */}
+                <div className="flex justify-end">
+                  <div className="w-60">
+                    <img src={data?.gambarUrl} alt="Template Tanaman"></img>
+                  </div>
+                </div>
               </div>
             </div>
+            {/* Judul Tanaman - END */}
 
-            {/* <div className="flex justify-end">
-              <div className="w-56">
-                <img src={PlantBg} alt="Template Tanaman"></img>
+            {/* Artikel - START */}
+            <article className="flex flex-col gap-6 px-8">
+              {/* Deskripsi - START */}
+              <div id="desk__container">
+                <p className="text-b-md text-justify">{data?.deskripsi}</p>
               </div>
-            </div> */}
-          </div>
+              {/* Deskripsi - END */}
+
+              {/* Manfaat - START */}
+              <div id="manfaat__container" className="flex flex-col gap-3">
+                <h5 className="font-bold">Manfaat</h5>
+                <p className="text-b-md text-justify">{data?.manfaat}</p>
+              </div>
+              {/* Manfaat - END */}
+
+              {/* Kandungan Kimia - START */}
+              <div id="kimia__container" className="flex flex-col gap-3">
+                <h5 className="font-bold">Kandungan Kimia</h5>
+                <p className="text-b-md text-justify">{data?.kandunganKimia}</p>
+              </div>
+              {/* Manfaat - END */}
+            </article>
+          </main>
+
+          {/* Cari Lebih - START */}
+          <CariLebih />
+          {/* Cari Lebih - END */}
+
+          {/* FOOTER - START */}
+          <Footer />
+          {/* FOOTER - END */}
         </div>
-        {/* Judul Tanaman - END */}
-
-        {/* Artikel - START */}
-        <article className="flex flex-col gap-6 px-8">
-          {/* Deskripsi - START */}
-          <div id="desk__container">
-            <p className="text-b-md text-justify">
-              Kunyit, yang dikenal juga dengan nama Curcuma longa, adalah sebuah
-              tanaman herbal yang berasal dari Asia Tenggara, khususnya India
-              dan Indonesia. Tanaman ini dikenal karena akarnya yang memiliki
-              rasa pahit dan kaya akan senyawa-senyawa aktif yang memberikan
-              manfaat kesehatan. Tanaman kunyit memiliki batang yang pendek dan
-              rimpang yang berbentuk mirip jahe. Rimpang kunyit memiliki warna
-              oranye cerah dan daging yang keras. Daun-daun kunyit berbentuk
-              pelepah, berwarna hijau, dan tumbuh dalam kelompok yang rapat.
-            </p>
-          </div>
-          {/* Deskripsi - END */}
-
-          {/* Manfaat - START */}
-          <div id="manfaat__container" className="flex flex-col gap-3">
-            <h5 className="font-bold">Manfaat</h5>
-            <p className="text-b-md text-justify">
-              Antiinflamasi: Mengurangi peradangan dalam tubuh. Antioksidan:
-              Melindungi sel-sel tubuh dari kerusakan oksidatif. Meningkatkan
-              sistem kekebalan tubuh: Menstimulasi sistem kekebalan tubuh.
-              Mendukung pencernaan: Membantu pencernaan lemak dan meredakan
-              masalah pencernaan. Perlindungan hati: Melindungi kesehatan hati
-              dan mencegah kerusakan.
-            </p>
-          </div>
-          {/* Manfaat - END */}
-
-          {/* Kandungan Kimia - START */}
-          <div id="kimia__container" className="flex flex-col gap-3">
-            <h5 className="font-bold">Kandungan Kimia</h5>
-            <p className="text-b-md text-justify">
-              Antiinflamasi: Mengurangi peradangan dalam tubuh. Antioksidan:
-              Melindungi sel-sel tubuh dari kerusakan oksidatif. Meningkatkan
-              sistem kekebalan tubuh: Menstimulasi sistem kekebalan tubuh.
-              Mendukung pencernaan: Membantu pencernaan lemak dan meredakan
-              masalah pencernaan. Perlindungan hati: Melindungi kesehatan hati
-              dan mencegah kerusakan.
-            </p>
-          </div>
-          {/* Manfaat - END */}
-        </article>
-      </main>
-
-      {/* Cari Lebih - START */}
-      <CariLebih />
-      {/* Cari Lebih - END */}
-
-      {/* FOOTER - START */}
-      <Footer />
-      {/* FOOTER - END */}
+      ) : (
+        <p>Data tidak ditemukan.</p>
+      )}
     </div>
   )
 }
