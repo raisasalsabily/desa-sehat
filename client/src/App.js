@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home.js"
-import Plant from "./pages/Plant.js"
 import Tanaman from "./pages/Tanaman.js"
 
 function App() {
@@ -8,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         {/* <Route path="/" caseSensitive={false} element={<Home />} /> */}
-        <Route path="/tanaman" caseSensitive={false} element={<Tanaman />} />
+        {/* <Route path="/tanaman" caseSensitive={false} element={<Tanaman />} /> */}
         <Route
           path="/tanaman/:slug"
           caseSensitive={false}

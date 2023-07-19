@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router-dom"
 import axios from "axios"
 
-import dataTanaman from "./dataTanaman.json"
+// import dataTanaman from "./dataTanaman.json"
 
 import Navbar from "../components/navbar/Navbar"
 import PlantImg from "../assets/images/plantImg.png"
@@ -69,7 +69,7 @@ const Plant = () => {
                 </div>
 
                 {/* gambar tanaman */}
-                <div className="flex justify-end">
+                <div className="my-6 flex justify-end">
                   <div className="w-60">
                     <img src={data?.gambarUrl} alt="Template Tanaman"></img>
                   </div>
@@ -81,7 +81,7 @@ const Plant = () => {
             {/* Artikel - START */}
             <article className="flex flex-col gap-6 px-8">
               {/* Deskripsi - START */}
-              <div id="desk__container">
+              <div id="desk__container" className="mt-6">
                 <p className="text-b-md text-justify">{data?.deskripsi}</p>
               </div>
               {/* Deskripsi - END */}
@@ -103,7 +103,7 @@ const Plant = () => {
           </main>
 
           {/* Cari Lebih - START */}
-          <CariLebih />
+          <CariLebih nama={data?.nama} />
           {/* Cari Lebih - END */}
 
           {/* FOOTER - START */}
